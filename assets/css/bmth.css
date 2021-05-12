@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+    width: 100%;
+}
+
+body {
+    background: rgb(255,255,255);
+    /* background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(94,87,121,1) 35%, rgba(0,0,0,1) 70%); */
+    font-family: 'Merriweather', serif !important;
+}
+
+.navbar {
+    background-color: black;
+    height: 100px;
+}
+
+.logo {
+    float: left;
+    padding: 0px;
+}
+
+.logo img {
+    height: 90px;
+    filter: brightness(0) invert(1);
+}
+
+.options {
+    float: right;
+    padding: 30px;
+}
+
+.options a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.options a:hover{
+    border-bottom: 1px solid white;
+}
+
+.banner {
+    background-image: url(../img/bmth/bmth_banner.jpg);
+    background-size: cover;
+    height: 500px;
+    opacity: 0.9;
+}
+
+.name {
+    float: right;
+    padding: 70px 20px;
+}
+
+.name h1{
+    font-size: 90px !important;
+    color: black !important;
+    font-family: Arial, Helvetica, sans-serif, sans-serif !important;
+    font-weight: 600 !important;
+    text-shadow: 3px 3px white !important;
+}
+
+.history {
+    padding: 70px !important;
+}
+
+.history h2 {
+    font-size: 40px !important;
+} 
+
+.history p {
+    font-size: 20px !important;
+    text-align: justify !important;
+    font-weight: 400 !important;
+}
