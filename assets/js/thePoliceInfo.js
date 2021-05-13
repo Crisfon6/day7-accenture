@@ -1,3 +1,110 @@
+let globalAlbums = [];
+let index = false;
+let globalArtist = [];
+let globalTracks = [];
+const artist = "5NGO30tJxFlKixkPSgXcFE";
+const getToken = async() => {
+    let requestOptions = {
+        method: "GET",
+        redirect: "follow",
+    };
+    let resp = await fetch(
+        "https://spotfiy-token.herokuapp.com/spotify/",
+        requestOptions
+    );
+    let bearrer = await resp.text();
+    bearrer = JSON.parse(bearrer)["access_token"];
+    localStorage.setItem("Bearrer", bearrer);
+};
+
+const preQuery = async(method) => {
+    let myHeaders = new Headers();
+    const bearrer = localStorage.getItem("Bearrer");
+    myHeaders.append("Authorization", `Bearer ${bearrer}`);
+
+    requestOptions = {
+        method: method,
+        headers: myHeaders,
+        redirect: "follow",
+    };
+    return requestOptions;
+};
+
+const getArtist = async() => {
+    console.log("get artist");
+
+    const requestOptions = await preQuery("GET");
+    const resp = await fetch(
+        `https://api.spotify.com/v1/artists/${artist}`,
+        requestOptions
+    );
+    if (resp.status == 401) {
+        await getToken();
+        getArtist();
+    }
+    let data = await resp.text();
+    data = JSON.parse(data);
+    return data;
+
+};
+const getAlbums = async() => {
+    const requestOptions = await preQuery("GET");
+
+    const resp = await fetch(
+        `https://api.spotify.com/v1/artists/${artist}/albums`,
+        requestOptions
+    );
+    if (resp.status == 401) {
+        await getToken();
+        getAlbums();
+    }
+
+    let data = await resp.text();
+    data = JSON.parse(data);
+    const albums = data["items"];
+    return albums;
+};
+const getMusicByAlbum = async(id, requestOptions) => {
+    const resp = await fetch(
+        `https://api.spotify.com/v1/albums/${id}/tracks`,
+        requestOptions
+    );
+    if (resp.status == 401) {
+        await getToken();
+        resp = await getMusicByAlbum(album['id'], requestOptions);
+    }
+    let data = await resp.text();
+    data = JSON.parse(data);
+    return data['items'];
+}
+
+const getTracks = async() => {
+
+    const requestOptions = await preQuery("GET");
+    for (let i = 0; i < globalAlbums.length; i++) {
+        let music = await getMusicByAlbum(globalAlbums[i]['id'], requestOptions);
+        for (let i = 0; i < music.length; i++) {
+            globalTracks.push(music[i]);
+
+        }
+
+    }
+
+
+};
+
+
+const main = async() => {
+        globalAlbums = await getAlbums();
+        await getTracks();
+        console.log(globalAlbums)
+        drawAlbums(globalAlbums);
+
+    }
+    // getAlbums();
+
+main();
+
 const thepoliceMembers = [
     {name:"Sting",
     description:`Gordon Matthew Thomas Sumner (Wallsend, Tyneside del Norte, Inglaterra, 2 de octubre de 1951), conocido artísticamente como Sting, es un músico británico que se desempeñó inicialmente como bajista, y más tarde como cantante y bajista del grupo musical The Police, formando luego su propia banda.
@@ -47,16 +154,19 @@ $membersDiv.appendChild($fragmentMembers)
 
 
 /*ALBUMS*/
+
+const drawAlbums = (globalAlbums) =>{
 $albumsDiv = document.getElementById('albums')
 $templateAlbums = document.getElementById('albums-template').content
 $fragmentAlbums = document.createDocumentFragment()
 
 
-thePoliceAlbums.forEach(el=>{
-$templateAlbums.querySelector("img").setAttribute("src",`./assets/img/thepolice/albums/${el.img}`)
-$templateAlbums.querySelector(".albums-card-content").innerHTML =el.nombre
+globalAlbums.forEach(el=>{
+$templateAlbums.querySelector("img").setAttribute("src",`${el.images[0].url}`)
+$templateAlbums.querySelector(".albums-card-content").innerHTML =el.name
 let $clone = document.importNode($templateAlbums,true)
 $fragmentAlbums.appendChild($clone)
 })
 
 $albumsDiv.appendChild($fragmentAlbums)
+}
