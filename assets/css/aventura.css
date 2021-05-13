@@ -1,0 +1,54 @@
+    /* * {
+    border: 1px solid;blackberry
+    http://brandcolors.net/
+} */
+    
+    body {
+        background: #000000;
+    }
+    
+    .banner {
+        margin-top: 5%;
+    }
+    
+    h1 {
+        color: #8cb811;
+    }
+    
+    h3 {
+        color: #fdb813;
+    }
+    
+    .subtitle {
+        color: #005387;
+        text-align: center;
+    }
+    
+    #genres {
+        color: #a1a1a4;
+    }
+    
+    #imgBanner {
+        width: 50%;
+        border-radius: 200px;
+    }
+    
+    .carousel-caption {
+        background-color: rgba(10, 10, 10, 0.733);
+        padding: 0 important!;
+    }
+    
+    .white {
+        color: white !important;
+    }
+    
+    #search {
+        align-items: center;
+    }
+    
+    .player {
+        border: 3px solid #8cb811;
+        border-radius: 50px;
+        text-align: center;
+        background-color: #88aca1;
+    }
