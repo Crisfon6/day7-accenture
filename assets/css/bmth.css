@@ -99,22 +99,15 @@ li {
     color:  lightgray;
 }
 
-.members {
-    margin: 20px;
+.membs {
     padding: 20px;
+    max-width: 100%;
+    display: inline-block;
 }
 
-.members h2 {
+.membs h2 {
     font-size: 40px;
     color: lightgray;
-}
-
-.members table{
-    height: 1000px;
-    width: 1000px;
-}
-.members td {
-    padding: 20px;
 }
 
 .card-img-top {
@@ -126,7 +119,7 @@ li {
     font-size: 14px;
     margin: 10px;
     padding: 10px;
-    float: left;
+    
     border-radius: 20px;
     height: 700px;
 }
@@ -167,6 +160,6 @@ li {
     height: 200px;
 }
 
-footer {
+.footer {
     color: lightgray;
 }
