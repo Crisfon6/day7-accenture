@@ -205,7 +205,6 @@ const main = async() => {
         drawBanner();
         drawCarousel();
         drawTracks(globalTracks);
-
     }
     // getAlbums();
 
