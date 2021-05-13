@@ -11,13 +11,20 @@ html {
 
 body {
     background: rgb(0, 0, 0) !important;
-    /* background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(94,87,121,1) 35%, rgba(0,0,0,1) 70%); */
     font-family: 'Merriweather', serif !important;
 }
 
-.navbar {
-    background-color: black;
-    height: 100px;
+h1 {
+    color: lightgray;
+}
+
+h3 {
+    color: lightgray;
+}
+
+li {
+    color: lightgray;
+    font-size: 20px;
 }
 
 .logo {
@@ -25,9 +32,18 @@ body {
     padding: 0px;
 }
 
-.logo img {
-    height: 90px;
+.logoimg {
+    height: 90px !important;
     filter: brightness(0) invert(1);
+}
+
+.carousel-item img{
+    width: 500px !important;
+}
+
+.navbar {
+    background-color: rgb(0, 0, 0);
+    height: 100px;
 }
 
 .options {
@@ -47,7 +63,7 @@ body {
     color: coral !important;
 }
 
-.banner {
+.fondo {
     background-image: url(../img/bmth/bmth_banner.jpg);
     background-size: cover;
     height: 500px;
@@ -84,6 +100,7 @@ body {
 }
 
 .members {
+    margin: 20px;
     padding: 20px;
 }
 
@@ -116,4 +133,40 @@ body {
 
 .card-text {
     text-align: justify;
+}
+
+.discografia {
+    margin-bottom: 30px;
+}
+
+.discografia h2{
+    font-size: 40px;
+    color: lightgray;
+}
+
+.albums {
+    padding: 20px;
+}
+
+.albums .card {
+    float: left;
+    width: 302px !important;
+    height: 370px !important;
+    border-radius: 20px;
+    padding-bottom: 5px;
+    margin: 10px;
+}
+
+.albums .card img{
+    height: 300px !important;
+    width: 300px !important;
+    border-radius: 20px;
+}
+
+.imgBanner {
+    height: 200px;
+}
+
+footer {
+    color: lightgray;
 }
