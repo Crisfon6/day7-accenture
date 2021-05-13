@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+    width: 100%;
+}
+
+body {
+    background: rgb(0, 0, 0) !important;
+    font-family: 'Merriweather', serif !important;
+}
+
+h1 {
+    color: lightgray;
+}
+
+h3 {
+    color: lightgray;
+}
+
+li {
+    color: lightgray;
+    font-size: 20px;
+}
+
+.logo {
+    float: left;
+    padding: 0px;
+}
+
+.logoimg {
+    height: 90px !important;
+    filter: brightness(0) invert(1);
+}
+
+.carousel-item img{
+    width: 500px !important;
+}
+
+.navbar {
+    background-color: rgb(0, 0, 0);
+    height: 100px;
+}
+
+.options {
+    float: right;
+    padding: 30px;
+}
+
+.options a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.options a:hover{
+    border-bottom: 1px solid white;
+    color: coral !important;
+}
+
+.fondo {
+    background-image: url(../img/bmth/bmth_banner.jpg);
+    background-size: cover;
+    height: 500px;
+    opacity: 0.9;
+}
+
+.name {
+    float: right;
+    padding: 70px 20px;
+}
+
+.name h1{
+    font-size: 90px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif, sans-serif;
+    font-weight: 600;
+    text-shadow: 3px 3px white;
+}
+
+.history {
+    padding: 70px;
+}
+
+.history h2 {
+    font-size: 40px;
+    color: lightgray;
+} 
+
+.history p {
+    font-size: 20px;
+    text-align: justify ;
+    font-weight: 400;
+    color:  lightgray;
+}
+
+.membs {
+    padding: 20px;
+    max-width: 100%;
+    display: inline-block;
+}
+
+.membs h2 {
+    font-size: 40px;
+    color: lightgray;
+}
+
+.card-img-top {
+    height: 400px !important;
+    border-radius: 20px;
+}
+
+.membs .card{
+    font-size: 14px;
+    margin: 10px;
+    padding: 10px;
+    
+    border-radius: 20px;
+    height: 700px;
+}
+
+.card-text {
+    text-align: justify;
+}
+
+.discografia {
+    margin-bottom: 30px;
+}
+
+.discografia h2{
+    font-size: 40px;
+    color: lightgray;
+}
+
+.albums {
+    padding: 20px;
+}
+
+.albums .card {
+    float: left;
+    width: 302px !important;
+    height: 370px !important;
+    border-radius: 20px;
+    padding-bottom: 5px;
+    margin: 10px;
+}
+
+.albums .card img{
+    height: 300px !important;
+    width: 300px !important;
+    border-radius: 20px;
+}
+
+.imgBanner {
+    height: 200px;
+}
+
+.footer {
+    color: lightgray;
+}
