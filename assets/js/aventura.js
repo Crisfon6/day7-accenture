@@ -30,50 +30,51 @@ const preQuery = async(method) => {
     return requestOptions;
 };
 const filterTracks = (search) => {
-    console.log('filter');
 
     const data = globalTracks.filter(track => track['name'].indexOf(search) !== -1);
     console.log(data);
-    drawTracks(data);
+    document.getElementById("tracks").innerHTML = '';
+    data.forEach(track => {
+        drawTracks(track);
+    })
 
+}
+const preDrawTracks = async(prom) => {
+    let song = await prom;
+    let songs = song['items'];
+    for (let i = 0; i < songs.length; i++) {
+        drawTracks(songs[i]);
+        globalTracks.push(songs[i]);
+    }
 }
 
 const drawTracks = (data) => {
     let tracks = document.getElementById("tracks");
-    tracks.innerHTML = "";
 
+    let row = document.createElement('div');
+    row.setAttribute('class', 'row mt-3 player');
+    let col = document.createElement('div');
+    col.setAttribute('class', 'col');
+    let audio = document.createElement('audio');
+    audio.setAttribute('controls', '');
 
-    data.forEach((track) => {
-        let row = document.createElement('div');
-        row.setAttribute('class', 'row mt-3 player');
-        let col = document.createElement('div');
-        col.setAttribute('class', 'col');
-        let audio = document.createElement('audio');
-        audio.setAttribute('controls', '');
+    let source = document.createElement('source');
+    source.setAttribute('src', data['preview_url']);
+    source.setAttribute('type', 'audio/mp3');
 
+    audio.appendChild(source);
+    col.appendChild(audio);
 
-        let source = document.createElement('source');
-        source.setAttribute('src', track['preview_url']);
-        source.setAttribute('type', 'audio/mp3');
+    let colName = document.createElement('div');
+    colName.setAttribute('class', 'col');
+    let name = document.createElement('h3');
+    name.setAttribute('class', 'nameSong');
+    name.innerHTML = data['name'];
+    colName.appendChild(name);
 
-        audio.appendChild(source);
-
-        col.appendChild(audio);
-
-
-        let colName = document.createElement('div');
-        colName.setAttribute('class', 'col');
-        let name = document.createElement('h3');
-        name.setAttribute('class', 'nameSong');
-        name.innerHTML = track['name'];
-        colName.appendChild(name);
-
-        row.appendChild(col);
-        row.appendChild(colName);
-        tracks.appendChild(row);
-
-    });
-
+    row.appendChild(col);
+    row.appendChild(colName);
+    tracks.appendChild(row);
 
 };
 const drawBanner = () => {
@@ -88,7 +89,6 @@ const drawBanner = () => {
 const drawCarousel = () => {
     let carousel = document.getElementById("carousel");
     let carouselInd = document.getElementById('carouselInd');
-
     globalAlbums.forEach((album, idx) => {
         let div = document.createElement('div');
         let button = document.createElement('button');
@@ -180,18 +180,22 @@ const getMusicByAlbum = async(id, requestOptions) => {
 }
 
 const getTracks = async() => {
-
     const requestOptions = await preQuery("GET");
+    let fetchs = [];
     for (let i = 0; i < globalAlbums.length; i++) {
-        let music = await getMusicByAlbum(globalAlbums[i]['id'], requestOptions);
-        for (let i = 0; i < music.length; i++) {
-            globalTracks.push(music[i]);
-
-        }
-
+        fetchs.push(fetch(
+            `https://api.spotify.com/v1/albums/${globalAlbums[i]['id']}/tracks`,
+            requestOptions
+        ));
     }
+    Promise.all(fetchs)
+        .then(resps => {
+            resps.forEach(albumTracks => {
 
+                preDrawTracks(albumTracks.json());
+            })
 
+        }).catch(el => { console.error('error', el) });
 };
 const searchInput = document.getElementById('search');
 searchInput.addEventListener('input', () => {
@@ -199,13 +203,14 @@ searchInput.addEventListener('input', () => {
 });
 
 const main = async() => {
-        globalArtist = await getArtist();
-        globalAlbums = await getAlbums();
-        await getTracks();
-        drawBanner();
-        drawCarousel();
-        drawTracks(globalTracks);
-    }
-    // getAlbums();
+    globalArtist = await getArtist();
+    globalAlbums = await getAlbums();
+
+    await getTracks();
+    drawBanner();
+    drawCarousel();
+
+}
+
 
 main();
