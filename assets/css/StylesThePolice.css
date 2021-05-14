@@ -115,6 +115,19 @@ ul {
   padding: 5% 2%;
 }
 
+@media (max-width:600px){
+  .albums-content {
+    max-width: 100%;
+  grid-template-columns: 100%;
+}
+.members-content {
+  max-width: 100%;
+
+  grid-template-columns: 100%;
+
+}
+
+}
 .albums-card {
   border-radius: 5px;
   border: 1px solid rgb(94, 93, 93);
